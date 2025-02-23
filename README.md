@@ -1,4 +1,5 @@
 # React + TypeScript + Vite
+backend and test-vocacional has to be up in the same time
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

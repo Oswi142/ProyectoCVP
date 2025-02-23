@@ -39,7 +39,7 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
       { expiresIn: '1h' }
     );
 
-    res.json({ token });
+    res.json({ token, role: user.role });
   } catch (error) {
     console.error('Error en el login:', error);
     res.status(500).json({ error: 'Error en el servidor' });

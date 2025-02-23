@@ -1,3 +1,4 @@
+// src/pages/Login.tsx
 import React, { useState } from 'react';
 import { login } from '../services/authService';
 
@@ -11,6 +12,7 @@ const Login: React.FC = () => {
     try {
       const data = await login(username, password);
       console.log('Token recibido:', data.token);
+      // Aquí podrías guardar el token y redirigir al usuario
     } catch (err: any) {
       setError(err.message);
     }

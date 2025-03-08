@@ -1,18 +1,29 @@
-// src/pages/Login.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // 👈 Hook para redireccionar
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const data = await login(username, password);
       console.log('Token recibido:', data.token);
-      // Aquí podrías guardar el token y redirigir al usuario
+
+      // ✅ Guardar el token y el rol en localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('role', data.role); // Guardamos el rol
+
+      // ✅ Redirigir según el rol del usuario
+      if (data.role === 'admin') {
+        navigate('/admin-dashboard'); // Redirige a admin
+      } else {
+        navigate('/client-dashboard'); // Redirige a cliente
+      }
     } catch (err: any) {
       setError(err.message);
     }
